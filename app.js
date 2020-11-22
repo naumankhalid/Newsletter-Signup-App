@@ -2,6 +2,7 @@ const express = require("express");
 const request = require("request");
 const bodyParser = require("body-parser");
 const https = require("https");
+require('dotenv').config();
 
 const app = express();
 
@@ -44,9 +45,9 @@ const jsonData = JSON.stringify(data);   // converting JSON data into string
 
   //HTTPS request to Mailchimp API to add user to mailing list. https.request takes in url, options and callback function
 
-    const url = "https://us10.api.mailchimp.com/3.0/lists/ba4b34ae5f"
+    const url = process.env.URL;
     const options = {
-      auth: "nauman:80e54f2bed551dbf1bf47cd9de24225b-us10",
+      auth: process.env.AUTH,
       method: 'POST'
     };
 
@@ -79,11 +80,3 @@ const jsonData = JSON.stringify(data);   // converting JSON data into string
 app.post("/failure", function(req, res){
   res.redirect("/");
 })
-
-
-
-// // API Key
-// 80e54f2bed551dbf1bf47cd9de24225b-us10
-
-// List ID
-// ba4b34ae5f
